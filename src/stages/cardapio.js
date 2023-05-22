@@ -1,17 +1,20 @@
 import { acais, artesanais, beiruths, combos, cremeDeFrutas, frituras, hamburguers, lanchesFrios, lanchesTradicionais, milkShakes } from '../cardapio/index.js'
 import {errorMessage} from '../messages/errorMessage.js'
+import { storage } from '../storage.js'
+import { STAGES } from './index.js'
 
 
 export const cardapio = {
     async exec(client, message){
         const mensagem = message.body.trim()
-        const isMsgValid = /[1|2|3|4|5|6|7|8|9|10]/.test(mensagem)
-
+        const isMsgValid = /^([1-9]|10{1})$/.test(mensagem)
+        
         let msg = errorMessage()
 
         if(isMsgValid){
             const option = options[Number(mensagem)]()
             msg = option.message
+            storage[message.from].stage = option.nextStage
         }
 
 
@@ -26,7 +29,8 @@ const options = {
         message += mapItens(artesanais)
         message += '0 - *Voltar ao cardápio*'
         return {
-            message
+            message,
+            nextStage: STAGES.ARTESANAIS
         }
     },
     2: () => {
@@ -107,7 +111,7 @@ const options = {
 const mapItens = (item) => {
     let message = ""
     Object.keys(item).forEach((value) => {
-        message += `${value} - *${item[value].name}*          ${item[value].price ? `*R$${item[value].price.toFixed(2)}*` : ""}\n${item[value].description ? `_${item[value].description}_\n\n` : ""}`
+        message += `${value} - *${item[value].name}*          ${item[value].price ? `*R$${item[value].price.toFixed(2)}*` : ""}\n${item[value].description ? `_${item[value].description}_\n` : ""}\n`
     })
 
     return message
