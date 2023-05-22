@@ -35,7 +35,7 @@ const options = {
 
         return {
             message,
-            nextStage: null
+            nextStage: STAGES.INICIAL
         }
     }
 }

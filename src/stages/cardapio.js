@@ -20,7 +20,6 @@ export const cardapio = {
 }
 
 
-
 const options = {
     1: () => {
         let message = '  *ARTESANAIS*  \n\n'
@@ -28,6 +27,8 @@ const options = {
         Object.keys(artesanais).forEach((value) => {
             message += `${value} - *${artesanais[value].name}*     -    *R$${artesanais[value].price.toFixed(2)}*\n_${artesanais[value].description}_\n\n`
         })
+
+        message += '0 - *Voltar ao cardápio*'
 
         return {
             message
