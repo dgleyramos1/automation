@@ -2,6 +2,7 @@ import {errorMessage} from '../messages/errorMessage.js'
 import {cardapioMessage} from '../messages/cardapioMessage.js'
 import {atendenteMessage} from '../messages/atendenteMessage.js'
 import { storage } from '../storage.js'
+import {STAGES} from './index.js'
 
 export const menu = {
     async exec(client, message){
@@ -12,7 +13,7 @@ export const menu = {
         if(isMsgValid){
             const option = options[Number(mensagem)]()
             msg = option.message
-            storage[params.from].stage = option.nextStage
+            storage[message.from].stage = option.nextStage
         }
 
         await client.sendText(message.from, msg)
@@ -25,7 +26,8 @@ const options = {
         let message = cardapioMessage()
 
         return{
-            message
+            message,
+            nextStage: STAGES.CARDAPIO
         }
     },
     2: () => {

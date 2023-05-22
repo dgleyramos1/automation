@@ -1,3 +1,4 @@
+import { cardapio } from "./stages/cardapio.js"
 import { initial } from "./stages/initial.js"
 import { menu } from "./stages/menu.js"
 import { storage } from "./storage.js"
@@ -10,6 +11,10 @@ export const stages = [
   {
     description: "Menu",
     stage: menu
+  },
+  {
+    description: "Cardápio",
+    stage: cardapio
   }
 ]
 
