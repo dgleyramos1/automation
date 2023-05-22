@@ -1,4 +1,4 @@
-import { artesanais } from '../cardapio/index.js'
+import { acais, artesanais, beiruths, combos, cremeDeFrutas, frituras, hamburguers, lanchesFrios, lanchesTradicionais, milkShakes } from '../cardapio/index.js'
 import {errorMessage} from '../messages/errorMessage.js'
 
 
@@ -23,15 +23,92 @@ export const cardapio = {
 const options = {
     1: () => {
         let message = '  *ARTESANAIS*  \n\n'
-
-        Object.keys(artesanais).forEach((value) => {
-            message += `${value} - *${artesanais[value].name}*     -    *R$${artesanais[value].price.toFixed(2)}*\n_${artesanais[value].description}_\n\n`
-        })
-
+        message += mapItens(artesanais)
         message += '0 - *Voltar ao cardápio*'
-
+        return {
+            message
+        }
+    },
+    2: () => {
+        let message = '  *HAMBURGUERES*  \n\n'
+        message += mapItens(hamburguers)
+        message += '0 - *Voltar ao cardápio*'
+        return {
+            message
+        }
+    },
+    3: () => {
+        let message = '  *LANCHES FRIOS*  \n\n'
+        message += mapItens(lanchesFrios)
+        message += '0 - *Voltar ao cardápio*'
+        return {
+            message
+        }
+    },
+    4: () => {
+        let message = '  *LANCHES TRADICIONAIS*  \n\n'
+        message += mapItens(lanchesTradicionais)
+        message += '0 - *Voltar ao cardápio*'
+        return {
+            message
+        }
+    },
+    5: () => {
+        let message = "  *BEIRUTH'S*  \n\n"
+        message += mapItens(beiruths)
+        message += '0 - *Voltar ao cardápio*'
+        return {
+            message
+        }
+    },
+    6: () => {
+        let message = "  *FRITURAS*  \n\n"
+        message += mapItens(frituras)
+        message += '0 - *Voltar ao cardápio*'
+        return {
+            message
+        }
+    },
+    7: () => {
+        let message = "  *MILK SHAKES*  \n\n"
+        message += mapItens(milkShakes)
+        message += '0 - *Voltar ao cardápio*'
+        return {
+            message
+        }
+    },
+    8: () => {
+        let message = "  *AÇAÍS*  \n\n"
+        message += mapItens(acais)
+        message += '0 - *Voltar ao cardápio*'
+        return {
+            message
+        }
+    },
+    9: () => {
+        let message = "  *CREME DE FRUTAS*  \n\n"
+        message += mapItens(cremeDeFrutas)
+        message += '0 - *Voltar ao cardápio*'
+        return {
+            message
+        }
+    },
+    10: () => {
+        let message = "  *COMBOS*  \n\n"
+        message += mapItens(combos)
+        message += '0 - *Voltar ao cardápio*'
         return {
             message
         }
     }
+}
+
+
+const mapItens = (item) => {
+    let message = ""
+    Object.keys(item).forEach((value) => {
+        message += `${value} - *${item[value].name}*          ${item[value].price ? `*R$${item[value].price.toFixed(2)}*` : ""}\n${item[value].description ? `_${item[value].description}_\n\n` : ""}`
+    })
+
+    return message
 }
