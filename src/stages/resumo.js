@@ -19,8 +19,9 @@ export const resumo ={
             }else{
                 option = options[Number(mensagem)](message.from)
             }
-
+            
             msg = option.message
+            storage[message.from].payment = option.type ? option.type : ''
             storage[message.from].stage = option.nextStage
         }
 
@@ -31,24 +32,27 @@ export const resumo ={
 
 const options = {
     1: (from) => {
-        let message = pixMessage(from)
+        let message = pixMessage(from, 'Pix')
         return {
             message,
-            nextStage: STAGES.INICIAL
+            nextStage: STAGES.INICIAL,
+            type: 'PIX'
         }
     },
     2: (from) => {
         let message = "Certo"
         return {
             message,
-            nextStage: STAGES.INICIAL
+            nextStage: STAGES.INICIAL,
+            type: 'Dinheiro'
         }
     },
     3: (from) => {
-        let message = cartaoMessage(from)
+        let message = cartaoMessage(from, 'Cartão')
         return {
             message,
-            nextStage: STAGES.INICIAL
+            nextStage: STAGES.INICIAL,
+            type: 'Cartão'
         }
     },
     '*': () => {

@@ -2,11 +2,13 @@ import { storage } from "../storage.js"
 
 
 
-export const pixMessage = (from) => {
+export const pixMessage = (from, payment) => {
 
-    const {name, phone, address, itens, payment, total} = storage[from]
+    const {name, phone, address, itens, total} = storage[from]
 
     return `*NOVO PEDIDO*:\n\nCliente: *${name}*\nPhone: *${phone}*\nCarrinho:\n*${mapItens(itens)}*\nEndereço: *${address}*\nTaxa de entrega: *R$5.00*\nTempo de entrega: *50 minutos*.\nTotal à pagar: *${(total + 5).toFixed(2)}*\nPagamento: *${payment}*\n\n*Chave*: xxxxx-xxxxx-xxxxx-xxxxx\n\n*Por favor, nos envie o comprovante!*\n\n------------------------------------------------------\n\nVocê está conversando agora com o atendente pessoal, para cancelar digite\n\n**ENCERRAR**`
+
+    
 }
 
 
