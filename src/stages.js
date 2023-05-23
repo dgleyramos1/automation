@@ -1,3 +1,4 @@
+import { address } from "./stages/address.js"
 import { cardapio } from "./stages/cardapio.js"
 import { carrinho } from "./stages/carrinho.js"
 import { initial } from "./stages/initial.js"
@@ -30,6 +31,10 @@ export const stages = [
   {
     description: 'Carrinho',
     stage: carrinho
+  },
+  {
+    description: 'Endereço',
+    stage: address
   }
 ]
 

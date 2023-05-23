@@ -1,5 +1,6 @@
 import { cardapioMessage } from "../messages/cardapioMessage.js"
 import { errorMessage } from "../messages/errorMessage.js"
+import {addressMessage} from '../messages/addressMessage.js'
 import { storage } from "../storage.js"
 import { STAGES } from "./index.js"
 
@@ -25,7 +26,7 @@ export const carrinho = {
 
 const options = {
     '#': () => {
-        let message = 'Finalize'
+        let message = addressMessage()
 
         return {
             message,

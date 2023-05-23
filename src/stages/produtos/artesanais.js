@@ -5,6 +5,7 @@ import {addItem} from '../../messages/addItem.js'
 import { storage } from "../../storage.js"
 import {STAGES} from '../index.js'
 import { artesanais as buguers } from "../../cardapio/index.js"
+import { addressMessage } from "../../messages/addressMessage.js"
 
 
 export const artesanais = {
@@ -46,11 +47,11 @@ const options = {
         }
     },
     '#': () => {
-        let message = "Finalize"
+        let message = addressMessage()
 
         return {
             message,
-            nextStage: STAGES.CARDAPIO
+            nextStage: STAGES.ADDRESS
         }
     },
     '!': (from) => {
