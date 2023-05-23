@@ -15,6 +15,7 @@ export const address = {
         }else {
             storage[message.from].address = message.body
             msg = resumoPedido(message.from)
+            storage[message.from].stage = STAGES.RESUMO
         }
 
 

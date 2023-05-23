@@ -5,6 +5,7 @@ export * from './produtos/artesanais.js'
 export * from './produtos/secundary/pao.js'
 export * from './carrinho.js'
 export * from './address.js'
+export * from './resumo.js'
 
 export const STAGES = {
     INICIAL: '0',
@@ -13,5 +14,6 @@ export const STAGES = {
     ARTESANAIS: '3',
     PAES: '4',
     CARRINHO: '5',
-    ADDRESS: '6'
+    ADDRESS: '6',
+    RESUMO: '7'
 }
