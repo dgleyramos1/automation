@@ -1,5 +1,6 @@
 import { errorMessage } from "../../messages/errorMessage.js"
 import {removeItem} from '../../messages/removeItem.js'
+import { carrinhoMessage } from '../../messages/carrinhoMessage.js'
 import {addItem} from '../../messages/addItem.js'
 import { storage } from "../../storage.js"
 import {STAGES} from '../index.js'
@@ -9,16 +10,20 @@ import { artesanais as buguers } from "../../cardapio/index.js"
 export const artesanais = {
     async exec(client, message){
         const mensagem = message.body.trim()
-        const isMsgValid = /[0|1|2|3|4|5|6|#|*]/.test(mensagem)
+        const isMsgValid = /[0|1|2|3|4|5|6|#|*|!]/.test(mensagem)
 
 
         let msg = errorMessage()
         if(isMsgValid){
-            if(['#', '*', '3', '4'].includes(mensagem)){
-                const option = options[mensagem]()
-                if(['3', '4'].includes(mensagem)){
-                    const option = options[Number(mensagem)]()
+            if(['#', '*','!', '3', '4'].includes(mensagem)){
+                let option;
+                if(['!'].includes(mensagem)){
+                    option = options[mensagem](message.from)
+                }else if(['3', '4'].includes(mensagem)){
+                    option = options[Number(mensagem)]()
                     storage[message.from].itens.push(buguers[mensagem])
+                }else {
+                    option = options[mensagem]()
                 }
                 msg = option.message
                 storage[message.from].stage = option.nextStage
@@ -27,10 +32,6 @@ export const artesanais = {
                 storage[message.from].itens.push(buguers[mensagem])
             }
         }
-
-
-        console.log(storage[message.from])
-
         await client.sendText(message.from, msg);
     }
 }
@@ -50,6 +51,14 @@ const options = {
         return {
             message,
             nextStage: STAGES.CARDAPIO
+        }
+    },
+    '!': (from) => {
+        let message = carrinhoMessage(from)
+
+        return {
+            message,
+            nextStage: STAGES.CARRINHO
         }
     },
     3: () => {

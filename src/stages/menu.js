@@ -10,6 +10,7 @@ export const menu = {
         const isMsgValid = /[1|2]/.test(mensagem)
 
         let msg = errorMessage()
+        
         if(isMsgValid){
             const option = options[Number(mensagem)]()
             msg = option.message

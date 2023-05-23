@@ -1,4 +1,5 @@
 import { cardapio } from "./stages/cardapio.js"
+import { carrinho } from "./stages/carrinho.js"
 import { initial } from "./stages/initial.js"
 import { menu } from "./stages/menu.js"
 import { artesanais } from "./stages/produtos/artesanais.js"
@@ -25,6 +26,10 @@ export const stages = [
   {
     description: 'Escolher quais pães',
     stage: pao
+  },
+  {
+    description: 'Carrinho',
+    stage: carrinho
   }
 ]
 
@@ -36,8 +41,12 @@ export function getStage({ from }) {
 
   storage[from] = {
     stage: 0,
+    name: '',
+    phone: '',
     itens: [],
     address: '',
+    payment: '',
+    total: 0
   }
 
   return storage[from].stage
